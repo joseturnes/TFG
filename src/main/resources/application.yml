@@ -1,0 +1,28 @@
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stellariumTFG
+    username: stellarium
+    password: admin
+  devtools:
+    restart:
+      trigger-file: reload
+    livereload:
+      enabled: false
+  jackson:
+    default-property-inclusion: NON_NULL
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+server:
+  servlet:
+    context-path: @project.contextPath@
+project:
+  jwt:
+    signKey: Bu:GW8bgPlEw
+    expirationMinutes: 1440
