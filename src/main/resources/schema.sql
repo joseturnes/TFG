@@ -11,6 +11,8 @@ CREATE TABLE usuario (
                         email VARCHAR(60) NOT NULL
 );
 
+
+
 CREATE TABLE imagen (
                         id SERIAL PRIMARY KEY,
                         nombre VARCHAR(255) NOT NULL,
