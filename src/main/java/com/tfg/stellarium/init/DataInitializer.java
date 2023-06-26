@@ -30,6 +30,8 @@ public class DataInitializer implements CommandLineRunner {
         usuarioBase.setRole(User.RoleType.ADMIN);
         usuarioBase.setEmail("john.doe@example.com");
 
-        userDao.save(usuarioBase);
+        if(!userDao.existsByLogin("admin")){
+            userDao.save(usuarioBase);
+        }
         }
 }

@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS "usuario";
 DROP TABLE IF EXISTS "imagen";
+DROP TABLE IF EXISTS "astro";
 
 CREATE TABLE usuario (
                         id SERIAL PRIMARY KEY,
@@ -11,7 +12,11 @@ CREATE TABLE usuario (
                         email VARCHAR(60) NOT NULL
 );
 
-
+CREATE TABLE astro (
+                          id SERIAL PRIMARY KEY,
+                          description VARCHAR(2000) NOT NULL,
+                          name VARCHAR(255)
+);
 
 CREATE TABLE imagen (
                         id SERIAL PRIMARY KEY,
