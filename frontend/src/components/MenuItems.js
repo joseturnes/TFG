@@ -3,7 +3,7 @@ export default {
         name : 'Carlos Rivas',
         img: 'logo.png',
         onClick(){
-            console.log('Hola');
+            console.log('Hola ' + name);
         }
     },
     items:[
@@ -20,7 +20,7 @@ export default {
             title: 'Información de Figuras',
             icon: 'fa-circle-info',
             onClick() {
-                console.log('Info Figuras');
+                console.log('Información de Figuras');
             }
         },
         {
