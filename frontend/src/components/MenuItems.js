@@ -1,7 +1,7 @@
 export default {
     profile: {
         name : 'Carlos Rivas',
-        img: 'logo.png',
+        img: 'stellarium.png',
         onClick(){
             console.log('Hola ' + name);
         }
