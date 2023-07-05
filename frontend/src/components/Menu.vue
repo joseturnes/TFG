@@ -1,16 +1,8 @@
-<script setup>
-import { ref } from 'vue';
-import menuItems from "@/components/MenuItems";
-import MenuItem from "@/components/MenuItem.vue";
-
-const collapsed = ref(false);
-
-</script>
 
 <template>
   <div :class="['menu',collapsed ? 'collapsed' : 'expanded']">
     <div class=" header">
-      <button class="menu-button" @click="collapsed = !collapsed">
+      <button class="menu-button" @click="menuButtonClick">
         <font-awesome-icon icon="fa-solid fa-bars" size="2x" />
       </button>
     </div>
@@ -31,8 +23,24 @@ const collapsed = ref(false);
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue';
+import menuItems from "@/components/MenuItems";
+import MenuItem from "@/components/MenuItem.vue";
+
+const emit = defineEmits(['menuCollapsed'])
+const menuButtonClick = () => {
+  collapsed.value = !collapsed.value;
+  console.log("Menu collapsed", collapsed.value);
+  emit("menuCollapsed");
+};
+
+let collapsed = ref(false);
+</script>
+
+
 <style scoped>
-.menu {
+  .menu {
   background-color: rgba(0,0,0,0.77);
   color: white;
   height: 100vh;
@@ -95,3 +103,4 @@ a:hover{
   color: black;
 }
 </style>
+
