@@ -1,6 +1,7 @@
 <script setup>
 import Menu from '@/components/Menu.vue';
 import { handleClick as handleMenuButtonClick } from "@/components/Menu.vue";
+import StellariumWeb from './components/StellariumWeb.vue';
 
 import {ref, computed} from "vue";
 
@@ -19,6 +20,8 @@ const menuWidth = computed(() => {
   return collapsed.value ? '80px' : '350px';
 });
 
+
+
 </script>
 
 
@@ -29,8 +32,7 @@ const menuWidth = computed(() => {
     </div>
     <div class="content-container" :style="{ width: contentWidth }">
       <section class="contenido">
-        Stellea
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus adipiscing commodo aliquet. Fusce bibendum orci magna, a pellentesque augue posuere sed. Ut bibendum magna tincidunt velit fermentum, eu laoreet arcu consectetur. Nullam nec enim sed justo fermentum sagittis. Nam varius dapibus risus, quis consectetur mauris. Praesent ut iaculis turpis. Phasellus congue tristique ligula et consequat.</p>
+        <StellariumWeb></StellariumWeb>
       </section>
     </div>
   </div>
@@ -54,8 +56,8 @@ const menuWidth = computed(() => {
 }
 
 .contenido {
-  border: 1px solid black;
-  padding: 10px;
+  border: 0px solid black;
+  padding: 5px;
 }
 
 </style>
