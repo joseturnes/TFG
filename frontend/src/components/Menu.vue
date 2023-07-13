@@ -53,7 +53,8 @@ let collapsed = ref(false);
 
 .header {
   display: flex;
-  justify-content: end;
+  justify-content: start;
+  padding-left: 19px;
 }
 
 .menu-button {

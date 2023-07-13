@@ -31,9 +31,7 @@ const menuWidth = computed(() => {
         <Menu class="menu" @menuCollapsed="handleToggleMenu"/>
     </div>
     <div class="content-container" :style="{ width: contentWidth }">
-      <section class="contenido">
         <StellariumWeb></StellariumWeb>
-      </section>
     </div>
   </div>
 
@@ -42,6 +40,12 @@ const menuWidth = computed(() => {
 
 
 <style scoped>
+
+#app{
+  margin: 0;
+  padding: 0;
+}
+
 .app-container {
   display: flex;
 }
@@ -53,11 +57,13 @@ const menuWidth = computed(() => {
 
 .content-container {
   flex-grow: 1;
+
 }
 
 .contenido {
-  border: 0px solid black;
   padding: 5px;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 </style>

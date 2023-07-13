@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
 import { faUserSecret, faBars, faFire, faHomeUser, faScrewdriverWrench, faCircleInfo, faPeopleGroup, faCircleQuestion, faMoon, faImages } from '@fortawesome/free-solid-svg-icons'
 
+import './main.css'
 /* add icons to the library */
 library.add(faUserSecret);
 library.add(faBars);
