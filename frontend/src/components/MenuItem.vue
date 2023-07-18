@@ -1,10 +1,13 @@
 <script setup>
+import {useRouter} from "vue-router";
+
 const props = defineProps(['item','collapsed'])
+const router = useRouter();
 </script>
 
 <template>
 
-  <a href="#" @click.prevent="props.item.onClick">
+  <a href="#" @click.prevent="props.item.onClick(router)">
     <div class="item">
       <div class="icon">
         <font-awesome-icon :icon="['fa-solid', props.item.icon]" size= '2x'/>

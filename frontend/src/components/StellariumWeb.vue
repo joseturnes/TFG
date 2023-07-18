@@ -15,11 +15,12 @@ export default {
 
 <style scoped>
 .stellarium{
-  height: 100vh;
+  height: 100%;
 }
 
 iframe{
   border: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  height: 100%;
 }
 </style>

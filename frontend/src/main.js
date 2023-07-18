@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUserSecret, faBars, faFire, faHomeUser, faScrewdriverWrench, faCircleInfo, faPeopleGroup, faCircleQuestion, faMoon, faImages } from '@fortawesome/free-solid-svg-icons'
 
 import './main.css'
+import router from "@/router";
 /* add icons to the library */
 library.add(faUserSecret);
 library.add(faBars);
@@ -24,5 +25,6 @@ library.add(faMoon);
 library.add(faImages);
 
 createApp(App)
+    .use(router)
     .component('font-awesome-icon', FontAwesomeIcon)
     .mount('#app')

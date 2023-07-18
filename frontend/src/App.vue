@@ -1,7 +1,9 @@
 <script setup>
 import Menu from '@/components/Menu.vue';
-import { handleClick as handleMenuButtonClick } from "@/components/Menu.vue";
-import StellariumWeb from './components/StellariumWeb.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 
 import {ref, computed} from "vue";
 
@@ -20,10 +22,7 @@ const menuWidth = computed(() => {
   return collapsed.value ? '80px' : '350px';
 });
 
-
-
 </script>
-
 
 <template>
   <div class="app-container">
@@ -31,39 +30,36 @@ const menuWidth = computed(() => {
         <Menu class="menu" @menuCollapsed="handleToggleMenu"/>
     </div>
     <div class="content-container" :style="{ width: contentWidth }">
-        <StellariumWeb></StellariumWeb>
+      <router-view />
     </div>
   </div>
-
-
 </template>
 
 
 <style scoped>
 
-#app{
-  margin: 0;
-  padding: 0;
-}
-
 .app-container {
   display: flex;
+  align-items: stretch;
+  height: 100vh;
 }
 
 .menu-container {
   width: auto; /* Ajusta el ancho del menú según tus necesidades */
   transition: width 0.3s;
+  height: 100vh;
 }
 
 .content-container {
   flex-grow: 1;
+  height: 100vh;
+  min-height: 0;
+  margin: 1em;
 
 }
 
-.contenido {
-  padding: 5px;
-  border: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+router-view {
+  min-height: 0; /* Lo mismo para router-view */
 }
 
 </style>

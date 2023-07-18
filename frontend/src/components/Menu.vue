@@ -9,7 +9,7 @@
     <div class="profile">
       <img :src="'../assets/' + menuItems.profile.img" alt="profile image">
       <div class="profile-name" v-if="!collapsed">
-        <a href="#" @click.prevent="menuItems.profile.onClick">
+        <a href="#" @click.prevent="menuItems.profile.onClick(router)">
           {{menuItems.profile.name}}
         </a>
       </div>
@@ -27,6 +27,7 @@
 import { ref } from 'vue';
 import menuItems from "@/components/MenuItems";
 import MenuItem from "@/components/MenuItem.vue";
+import { useRouter } from 'vue-router';
 
 const emit = defineEmits(['menuCollapsed'])
 const menuButtonClick = () => {
@@ -36,16 +37,18 @@ const menuButtonClick = () => {
 };
 
 let collapsed = ref(false);
+
+const router = useRouter();
+
 </script>
 
 
 <style scoped>
   .menu {
-  background-color: rgba(0,0,0,0.77);
   color: white;
   height: 100vh;
   transition: width 0.3s;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Verdana, Helvetica, sans-serif;
   position: fixed;
   left: 0;
   top: 0;
