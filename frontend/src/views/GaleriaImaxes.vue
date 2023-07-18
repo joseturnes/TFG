@@ -62,7 +62,9 @@ export default {
 }
 
 .title {
-  margin-bottom: 20px;
+  margin: 40px;
+  font-family: Verdana, Helvetica, sans-serif;
+  color: white;
 }
 
 .modal {
@@ -88,7 +90,7 @@ export default {
 .image-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  gap: 1em;
+  gap: 1.5em;
   width: 100%;
 }
 
