@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h1>¡Bienvenido a la página de Curiosidades!</h1>
-    <p>Este es el contenido de la página Curiosidades.</p>
+    <HtmlEditor></HtmlEditor>
   </div>
 </template>
 
 <script>
+import HtmlEditor from "../components/HtmlEditor.vue";
+
 export default {
-  name: 'Home',
+  components: {
+    HtmlEditor
+  }
 };
 </script>
 
-<style scoped>
-/* Estilos específicos para el componente InfoFiguras.vue */
-</style>
