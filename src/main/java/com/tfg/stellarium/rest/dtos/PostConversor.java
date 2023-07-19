@@ -13,6 +13,7 @@ public class PostConversor{
         postDto.setId(post.getId());
         postDto.setDescription(post.getDescription());
         postDto.setName(post.getName());
+        postDto.setType(post.getTipo());
 
         List<byte[]> images = post.getRelatedImages().stream()
                 .map(RelatedImage::getImage)
@@ -28,6 +29,15 @@ public class PostConversor{
         post.setId(postDto.getId());
         post.setDescription(postDto.getDescription());
         post.setName(postDto.getName());
+        if(postDto.getName().equals("CURIOSIDADES")){
+        post.setTipo(Post.PostType.CURIOSIDADES.name());
+        }else if(postDto.getName().equals("INICIATIVAS_AGRUPACIONS")){
+            post.setTipo(Post.PostType.INICIATIVAS_AGRUPACIONS.name());
+        }else{
+            post.setTipo(Post.PostType.ARTE_ASTRONOMIA.name());
+        }
+
+        post.setTipo(postDto.getType());
 
         List<RelatedImage> relatedImages = postDto.getRelatedImages().stream()
                 .map(RelatedImage::new)

@@ -7,16 +7,33 @@ import java.util.Objects;
 @Entity
 public class Post {
 
+    public enum PostType {
+        CURIOSIDADES,
+        INICIATIVAS_AGRUPACIONS,
+        ARTE_ASTRONOMIA
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private java.lang.String description;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RelatedImage> relatedImages;
 
-    private String name;
+    private java.lang.String name;
+
+    @Column(name = "post_type")
+    private String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public Long getId() {
         return id;
@@ -26,11 +43,11 @@ public class Post {
         this.id = id;
     }
 
-    public String getDescription() {
+    public java.lang.String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(java.lang.String description) {
         this.description = description;
     }
 
@@ -42,11 +59,11 @@ public class Post {
         this.relatedImages = relatedImages;
     }
 
-    public String getName() {
+    public java.lang.String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(java.lang.String name) {
         this.name = name;
     }
 

@@ -9,6 +9,16 @@ public class PostDto {
     private List<byte[]> relatedImages;
     private String name;
 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     // Getters and Setters
     public Long getId() {
         return id;

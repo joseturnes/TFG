@@ -27,9 +27,10 @@ CREATE TABLE imagen (
 );
 
 CREATE TABLE post (
-   id SERIAL PRIMARY KEY,
-   description TEXT,
-   name VARCHAR(255)
+    id SERIAL PRIMARY KEY,
+    description TEXT,
+    name VARCHAR(255),
+    post_type VARCHAR(20)
 );
 
 CREATE TABLE related_image (
