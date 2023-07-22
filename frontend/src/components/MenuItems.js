@@ -1,11 +1,26 @@
 export default {
     profile: {
-        name : 'Administracion',
+        name : 'Iniciar sesión como administrador',
         img: 'stellarium.png',
         onClick(router){
             console.log('Hola ' + this.name);
             console.log(router);
-            router.push('/administracion');
+            if(localStorage.getItem('userToken')){
+                router.push('/usuario')
+            } else {
+                router.push('/administracion');
+            }
+
+        }
+    },
+    logout: {
+        name : 'Pechar sesión',
+        img: 'stellarium.png',
+        onClick(router){
+            console.log('Chao ' + this.name);
+            console.log(router);
+            localStorage.clear();
+            window.location.reload();
         }
     },
     setProfileName(userName) {

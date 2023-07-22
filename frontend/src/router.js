@@ -7,6 +7,7 @@ import Curiosidades from "@/views/Curiosidades.vue";
 import ArteAstronomia from "@/views/ArteAstronomia.vue";
 import GaleriaImaxes from "@/views/GaleriaImaxes.vue";
 import Login from "@/views/Login.vue";
+import Usuario from "@/views/Usuario.vue";
 
 const routes = [
     {
@@ -48,6 +49,11 @@ const routes = [
         path: '/administracion',
         name: 'Administracion',
         component: Login
+    },
+    {
+        path: '/usuario',
+        name: 'Usuario',
+        component: Usuario
     }
 ];
 

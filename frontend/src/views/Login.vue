@@ -1,18 +1,20 @@
 <template>
-  <div class="login-container">
-    <h2>Iniciar sesión</h2>
-    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-    <form @submit.prevent="loginUser">
-      <div class="form-group">
-        <label for="username">Nome de usuario: </label>
-        <input type="text" id="username" v-model="username" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Contrasinal: </label>
-        <input type="password" id="password" v-model="password" required />
-      </div>
-      <button type="submit">Iniciar sesión</button>
-    </form>
+  <div class="container mt-5">
+    <div class="login-container">
+      <h2 class="mb-3">Iniciar sesión</h2>
+      <div v-if="errorMessage" class="error-message mb-3">{{ errorMessage }}</div>
+      <form @submit.prevent="loginUser">
+        <div class="mb-3">
+          <label for="username" class="form-label">Nome de usuario:</label>
+          <input type="text" id="username" v-model="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contrasinal:</label>
+          <input type="password" id="password" v-model="password" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-outline-light">Iniciar sesión</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -36,17 +38,15 @@ export default {
           userName: this.username,
           password: this.password,
         });
-        // Almacenar el token en el localStorage o Vuex para futuras solicitudes
         const token = response.data.serviceToken;
         const userName = response.data.user.login;
-        console.log(response);
+        console.log(response.data.user);
+        localStorage.setItem('userId',response.data.user.id )
         localStorage.setItem('userToken', token);
         localStorage.setItem('userName', userName);
         menuItems.setProfileName(userName);
         this.$emit('profileNameChanged', userName);
-        // Redirigir a la página deseada después del inicio de sesión exitoso
-
-        this.$router.push('/galeria-imaxes'); // Cambia '/home' por la ruta que desees
+        await this.$router.push('/');
       } catch (error) {
         this.errorMessage = 'Credenciales incorrectas. Inténtalo de nuevo.';
         console.error(error);
@@ -60,6 +60,11 @@ export default {
 h2{
   color: white;
 }
+
+.form-label{
+  color: white;
+}
+
 .login-container {
   max-width: 400px;
   margin: auto;
@@ -76,14 +81,5 @@ h2{
 .error-message {
   color: red;
   margin-bottom: 10px;
-}
-
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 </style>

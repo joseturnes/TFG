@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().addFilter(new JwtFilter(authenticationManager(), jwtGenerator)).authorizeRequests()
 				.antMatchers(HttpMethod.POST,"/users/signUp").permitAll()
 				.antMatchers(HttpMethod.POST,"/users/login").permitAll()
+				.antMatchers(HttpMethod.PUT,"/users/*").permitAll()
 				.antMatchers(HttpMethod.POST,"/users/loginFromServiceToken").permitAll()
 				.antMatchers(HttpMethod.POST, "/users/*/changePassword").permitAll()
 				.antMatchers(HttpMethod.POST, "/imagenes/guardar").permitAll()

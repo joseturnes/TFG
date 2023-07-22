@@ -10,7 +10,10 @@
       <img :src="'../assets/' + menuItems.profile.img" alt="profile image">
       <div class="profile-name" v-if="!collapsed">
         <a href="#" @click.prevent="menuItems.profile.onClick(router)">
-          {{menuItems.profile.name}}
+          <font-awesome-icon icon="fa-solid fa-user" /> {{menuItems.profile.name}}
+        </a>
+        <a v-if="hasUserToken" href="#" @click.prevent="menuItems.logout.onClick(router)">
+          <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" /> {{menuItems.logout.name}}
         </a>
       </div>
     </div>
@@ -24,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import menuItems from "@/components/MenuItems";
 import MenuItem from "@/components/MenuItem.vue";
 import { useRouter } from 'vue-router';
@@ -37,7 +40,7 @@ const menuButtonClick = () => {
   emit("menuCollapsed");
 };
 
-let collapsed = ref(true);
+let collapsed = ref(false);
 
 const router = useRouter();
 
@@ -45,12 +48,32 @@ const clearLocalStorage = () => {
   localStorage.clear();
 };
 
+const hasUserToken = ref(false);
+
+onMounted(() => {
+  console.log('Página recargada');
+  hasUserToken.value = localStorage.getItem('userToken') !== null;
+});
+
 // Registra el evento beforeunload para limpiar el localStorage al recargar
 onBeforeUnmount(() => {
   window.removeEventListener('beforeunload', clearLocalStorage);
 });
 
 window.addEventListener('beforeunload', clearLocalStorage);
+
+const checkUrlChange = () => {
+  console.log('URL cambió:', router.currentRoute.value.fullPath);
+};
+
+watch(
+    () => router.currentRoute.value.fullPath,
+    (newVal, oldVal) => {
+      if (newVal !== oldVal) {
+        checkUrlChange();
+      }
+    }
+);
 
 </script>
 
@@ -64,6 +87,20 @@ window.addEventListener('beforeunload', clearLocalStorage);
   position: fixed;
   left: 0;
   top: 0;
+}
+
+.profile-name a {
+  display: inline-block;
+  align-items: center;
+  margin-right: 5px; /* Ajusta el espaciado entre los enlaces si es necesario */
+  position: relative; /* Agrega esta propiedad para que los pseudo-elementos sean relativos a este enlace */
+}
+
+  /* Utiliza :first-child para excluir el separador del primer enlace */
+.profile-name a:not(:first-child)::before {
+  content: '|'; /* Texto o símbolo que se utilizará como separador */
+  margin-right: 5px; /* Espaciado entre el separador y el texto del enlace */
+  color: #ccc; /* Color del separador, puedes ajustarlo según tus necesidades */
 }
 
 .header {

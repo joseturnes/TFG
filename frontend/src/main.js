@@ -8,7 +8,21 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faBars, faFire, faHomeUser, faScrewdriverWrench, faCircleInfo, faPeopleGroup, faCircleQuestion, faMoon, faImages } from '@fortawesome/free-solid-svg-icons'
+import {
+    faUserSecret,
+    faUser,
+    faBars,
+    faFire,
+    faHomeUser,
+    faScrewdriverWrench,
+    faCircleInfo,
+    faPeopleGroup,
+    faCircleQuestion,
+    faMoon,
+    faImages,
+    faArrowRightFromBracket,
+    faSpinner
+} from '@fortawesome/free-solid-svg-icons'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './main.css'
@@ -25,6 +39,9 @@ library.add(faPeopleGroup);
 library.add(faCircleQuestion);
 library.add(faMoon);
 library.add(faImages);
+library.add(faUser);
+library.add(faArrowRightFromBracket);
+library.add(faSpinner);
 
 createApp(App)
     .use(router)

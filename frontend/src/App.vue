@@ -7,7 +7,7 @@ const router = useRouter();
 
 import {ref, computed} from "vue";
 
-const collapsed = ref(true);
+const collapsed = ref(false);
 
 const handleToggleMenu = () => {
   collapsed.value = !collapsed.value;
@@ -22,12 +22,14 @@ const menuWidth = computed(() => {
   return collapsed.value ? '80px' : '350px';
 });
 
+const currentRoutePath = computed(() => router.currentRoute.value.path);
+
 </script>
 
 <template>
   <div class="app-container">
     <div class="menu-container" :style="{ width: menuWidth }">
-        <Menu class="menu" @menuCollapsed="handleToggleMenu"/>
+        <Menu class="menu" :key="currentRoutePath" @menuCollapsed="handleToggleMenu"/>
     </div>
     <div class="content-container" :style="{ width: contentWidth }">
       <router-view />
