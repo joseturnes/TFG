@@ -10,10 +10,10 @@
       <img :src="'../assets/' + menuItems.profile.img" alt="profile image">
       <div class="profile-name" v-if="!collapsed">
         <a href="#" @click.prevent="menuItems.profile.onClick(router)">
-          <font-awesome-icon icon="fa-solid fa-user" /> {{menuItems.profile.name}}
+          {{menuItems.profile.name}} <font-awesome-icon icon="fa-solid fa-user" />
         </a>
         <a v-if="hasUserToken" href="#" @click.prevent="menuItems.logout.onClick(router)">
-          <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" /> {{menuItems.logout.name}}
+          {{menuItems.logout.name}} <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" />
         </a>
       </div>
     </div>
