@@ -1,11 +1,32 @@
 export default {
     profile: {
-        name : 'Carlos Rivas',
+        name : 'Administracion',
         img: 'stellarium.png',
         onClick(router){
-            console.log('Hola ' + name);
-            console.log(router)
+            console.log('Hola ' + this.name);
+            console.log(router);
+            router.push('/administracion');
         }
+    },
+    setProfileName(userName) {
+        if (userName) {
+            this.profile.name = userName;
+            console.log(this.profile.name);
+        } else {
+            this.profile.name = 'Iniciar sesión';
+        }
+    },
+    created() {
+        // Obtener la información del usuario almacenada en localStorage
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            const userName = JSON.parse(userData).name;
+            this.setProfileName(userName);
+        } else {
+            // Si no hay información de usuario, establecer el nombre en "login"
+            this.setProfileName(null);
+        }
+
     },
     items:[
         {

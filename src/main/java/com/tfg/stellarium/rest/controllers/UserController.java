@@ -218,6 +218,12 @@ public class UserController {
 		userService.changePassword(id, params.getOldPassword(), params.getNewPassword());
 
 	}
+
+	@GetMapping("/usuario-registrado")
+	public ResponseEntity<AuthenticatedUserDto> obtenerUsuarioRegistrado(@RequestParam Long userId, @RequestParam String serviceToken) throws InstanceNotFoundException {
+		User user = userService.loginFromId(userId);
+		return ResponseEntity.ok(toAuthenticatedUserDto(serviceToken, user));
+	}
 	
 	/**
 	 * Generate service token.

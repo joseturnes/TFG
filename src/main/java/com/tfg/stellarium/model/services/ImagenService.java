@@ -12,4 +12,6 @@ public interface ImagenService {
     public Imagen obtenerImagen(Long id);
 
     public List<Imagen> obtenerTodas();
+
+    public boolean eliminarImagen();
 }

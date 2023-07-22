@@ -46,4 +46,14 @@ public class ImagenController {
         return ResponseEntity.ok(imagenes);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarImagen(@PathVariable("id") Long id) {
+        boolean eliminado = imagenService.eliminarImagen(id);
+        if (eliminado) {
+            return ResponseEntity.ok("Imagen eliminada correctamente");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

@@ -33,4 +33,13 @@ public class ImagenServiceImpl {
     public List<Imagen> obtenerTodas() {
         return imagenDao.findAll();
     }
+
+    public boolean eliminarImagen(final Long id){
+        imagenDao.deleteById(id);
+
+        if(imagenDao.existsById(id)){
+            return false;
+        }
+        return true;
+    }
 }
