@@ -7,7 +7,7 @@ const router = useRouter();
 
 import {ref, computed} from "vue";
 
-const collapsed = ref(false);
+const collapsed = ref(true);
 
 const handleToggleMenu = () => {
   collapsed.value = !collapsed.value;

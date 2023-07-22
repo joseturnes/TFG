@@ -7,7 +7,7 @@
     <div class="image-container">
       <div v-for="(imagen, index) in reversedImages" :key="imagen.id" class="image-item">
         <img :src="arrayToImage(imagen.datos)" @click="openModal(arrayToImage(imagen.datos))" alt="imagen" />
-        <button @click="eliminarImagen(imagen.id)" class="btn btn-danger btn-sm mt-2">Eliminar</button>
+        <button v-if="loggedIn" style="padding: 1px" @click="eliminarImagen(imagen.id)" class="btn btn-danger btn-sm mt-2">Eliminar</button>
       </div>
       <div v-if="errorModal" class="modal error-modal" @click="closeErrorModal">
         <div class="modal-content">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="uploadButton">
+    <div class="uploadButton" v-if="loggedIn">
       <button @click="uploadImage" class="btn btn-outline-light btn-lg mt-5">Subir Imaxe</button>
     </div>
   </div>
@@ -32,6 +32,7 @@ export default {
       selectedImage: null,
       errorModal: false,
       errorMessage: '',
+      loggedIn: false,
     };
   },
   computed: {
@@ -41,6 +42,7 @@ export default {
   },
   created() {
     this.fetchImages();
+    this.isLoggedIn();
   },
   methods: {
     async fetchImages() {
@@ -50,6 +52,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    isLoggedIn(){
+      this.loggedIn = localStorage.getItem('userToken') != null ;
+      console.log(this.loggedIn);
     },
     arrayToImage(bytes) {
       return `data:image/jpeg;base64,${bytes}`;
@@ -146,7 +152,7 @@ export default {
 .image-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-  gap: 1.5em;
+  gap: 2.5em;
   width: 100%;
 }
 

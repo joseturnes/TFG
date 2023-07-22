@@ -1,7 +1,7 @@
 
 <template>
   <div :class="['menu',collapsed ? 'collapsed' : 'expanded']">
-    <div class=" header">
+    <div class=" header" >
       <button class="menu-button" @click="menuButtonClick">
         <font-awesome-icon icon="fa-solid fa-bars" size="2x" />
       </button>
@@ -28,6 +28,7 @@ import { ref } from 'vue';
 import menuItems from "@/components/MenuItems";
 import MenuItem from "@/components/MenuItem.vue";
 import { useRouter } from 'vue-router';
+import { onBeforeUnmount } from 'vue';
 
 const emit = defineEmits(['menuCollapsed'])
 const menuButtonClick = () => {
@@ -36,9 +37,20 @@ const menuButtonClick = () => {
   emit("menuCollapsed");
 };
 
-let collapsed = ref(false);
+let collapsed = ref(true);
 
 const router = useRouter();
+
+const clearLocalStorage = () => {
+  localStorage.clear();
+};
+
+// Registra el evento beforeunload para limpiar el localStorage al recargar
+onBeforeUnmount(() => {
+  window.removeEventListener('beforeunload', clearLocalStorage);
+});
+
+window.addEventListener('beforeunload', clearLocalStorage);
 
 </script>
 

@@ -4,11 +4,11 @@
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <form @submit.prevent="loginUser">
       <div class="form-group">
-        <label for="username">Nombre de usuario:</label>
+        <label for="username">Nome de usuario: </label>
         <input type="text" id="username" v-model="username" required />
       </div>
       <div class="form-group">
-        <label for="password">Contraseña:</label>
+        <label for="password">Contrasinal: </label>
         <input type="password" id="password" v-model="password" required />
       </div>
       <button type="submit">Iniciar sesión</button>
@@ -19,6 +19,7 @@
 <script>
 import axios from 'axios';
 import menuItems  from "@/components/MenuItems";
+import router from "@/router";
 
 export default {
   data() {
@@ -43,7 +44,6 @@ export default {
         localStorage.setItem('userName', userName);
         menuItems.setProfileName(userName);
         this.$emit('profileNameChanged', userName);
-
         // Redirigir a la página deseada después del inicio de sesión exitoso
 
         this.$router.push('/galeria-imaxes'); // Cambia '/home' por la ruta que desees
@@ -57,6 +57,9 @@ export default {
 </script>
 
 <style scoped>
+h2{
+  color: white;
+}
 .login-container {
   max-width: 400px;
   margin: auto;
@@ -67,6 +70,7 @@ export default {
 
 .form-group {
   margin-bottom: 10px;
+  color: white;
 }
 
 .error-message {

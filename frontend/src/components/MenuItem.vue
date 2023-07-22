@@ -6,7 +6,6 @@ const router = useRouter();
 </script>
 
 <template>
-
   <a href="#" @click.prevent="props.item.onClick(router)">
     <div class="item">
       <div class="icon">
@@ -15,7 +14,6 @@ const router = useRouter();
       <div class="title" v-if="!collapsed">{{props.item.title}}</div>
     </div>
   </a>
-
 </template>
 
 <style scoped>
