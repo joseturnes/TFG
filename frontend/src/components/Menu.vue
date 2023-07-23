@@ -37,12 +37,9 @@ const emit = defineEmits(['menuCollapsed'])
 
 let collapsed = ref(JSON.parse(localStorage.getItem('menuCollapsed')) || false);
 
-console.log(collapsed.value);
-
 const menuButtonClick = () => {
   collapsed.value = JSON.parse(localStorage.getItem('menuCollapsed')) || false;
   collapsed.value = !collapsed.value;
-  console.log("Menu collapsed", collapsed.value);
   emit("menuCollapsed");
 
 };
@@ -56,7 +53,6 @@ const clearLocalStorage = () => {
 const hasUserToken = ref(false);
 
 onMounted(() => {
-  console.log('Página recargada');
   hasUserToken.value = localStorage.getItem('userToken') !== null;
 });
 
@@ -68,7 +64,6 @@ onBeforeUnmount(() => {
 window.addEventListener('beforeunload', clearLocalStorage);
 
 const checkUrlChange = () => {
-  console.log('URL cambió:', router.currentRoute.value.fullPath);
 };
 
 watch(

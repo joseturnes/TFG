@@ -15,7 +15,6 @@ const handleToggleMenu = () => {
 };
 
 const contentWidth = computed(() => {
-  console.log(collapsed ? 'calc(100% - 80px)' : 'calc(100% - 350px)');
   return collapsed.value ? 'calc(100% - 80px)' : 'calc(100% - 350px)';
 });
 

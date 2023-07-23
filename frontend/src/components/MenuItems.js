@@ -3,8 +3,6 @@ export default {
         name : 'Iniciar sesión como administrador',
         img: 'stellarium.jpeg',
         onClick(router){
-            console.log('Hola ' + this.name);
-            console.log(router);
             if(localStorage.getItem('userToken')){
                 router.push('/usuario')
             } else {
@@ -17,8 +15,6 @@ export default {
         name : 'Pechar sesión',
         img: 'stellarium.jpeg',
         onClick(router){
-            console.log('Chao ' + this.name);
-            console.log(router);
             localStorage.clear();
             window.location.reload();
         }
@@ -26,19 +22,16 @@ export default {
     setProfileName(userName) {
         if (userName) {
             this.profile.name = userName;
-            console.log(this.profile.name);
         } else {
             this.profile.name = 'Iniciar sesión';
         }
     },
     created() {
-        // Obtener la información del usuario almacenada en localStorage
         const userData = localStorage.getItem('userData');
         if (userData) {
             const userName = JSON.parse(userData).name;
             this.setProfileName(userName);
         } else {
-            // Si no hay información de usuario, establecer el nombre en "login"
             this.setProfileName(null);
         }
 
@@ -49,7 +42,6 @@ export default {
             title: 'Inicio',
             icon: 'fa-house-user',
             onClick(router) {
-                console.log('Inicio');
                 router.push('/inicio');
             }
         },
@@ -58,7 +50,6 @@ export default {
             title: 'Información de Figuras',
             icon: 'fa-circle-info',
             onClick(router) {
-                console.log('Información de Figuras');
                 router.push('/info-figuras');
             }
         },
@@ -67,7 +58,6 @@ export default {
             title: 'Iniciativas/Agrupacións',
             icon: 'fa-people-group',
             onClick(router) {
-                console.log('Iniciativas/Agrupacións');
                 router.push('/iniciativas');
             }
         },
@@ -76,7 +66,6 @@ export default {
             title: 'Curiosidades',
             icon: 'fa-circle-question',
             onClick(router) {
-                console.log('Curiosidades');
                 router.push('/curiosidades');
             }
         },
@@ -85,7 +74,6 @@ export default {
             title: 'Arte e Astronomía',
             icon: 'fa-moon',
             onClick(router) {
-                console.log('Arte e Astronomía');
                 router.push('/arte-astronomia');
             }
         },
@@ -94,7 +82,6 @@ export default {
             title: 'Galería de Imaxes',
             icon: 'fa-images',
             onClick(router) {
-                console.log('Galería de Imaxes');
                 router.push('/galeria-imaxes');
             }
         }

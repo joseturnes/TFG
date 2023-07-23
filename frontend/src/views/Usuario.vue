@@ -117,7 +117,6 @@ const fetchUserProfile = async () => {
     const response = await axios.get(`http://localhost:8080/stellarium/users/usuario-registrado?userId=${userId.value}&serviceToken=${serviceToken.value}`);
     user.value = response.data.user;
     editUser.value = { ...user.value };
-    console.log(editUser.value)
   } catch (error) {
     console.error('Error fetching user profile:', error);
   }

@@ -55,7 +55,6 @@ export default {
     },
     isLoggedIn(){
       this.loggedIn = localStorage.getItem('userToken') != null ;
-      console.log(this.loggedIn);
     },
     arrayToImage(bytes) {
       return `data:image/jpeg;base64,${bytes}`;
