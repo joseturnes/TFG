@@ -14,7 +14,10 @@
         </div>
         <div class="mb-3">
           <label for="imagen1" class="form-label">Imaxes relacionadas : </label>
-          <input type="file" @change="onFileChange" multiple class="form-control" />
+          <div class="custom-file">
+            <input type="file" @change="onFileChange" multiple class="custom-file-input" id="imagen1" />
+            <label class="custom-file-label" for="imagen1">Escolla ficheiros</label>
+          </div>
         </div>
         <button type="submit" class="btn btn-outline-light">Crear Publicación</button>
       </form>
@@ -26,7 +29,7 @@
           <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
             <div class="publication-header">
               <h3 class="mb-3">{{ publication.name }}</h3>
-              <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.id)" class="btn btn-danger btn-sm mt-2 red-button">Eliminar</button>
+              <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.id)" class="btn btn-outline-danger btn-sm mt-2 red-button">Eliminar</button>
             </div>
             <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
             <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
@@ -294,6 +297,16 @@ onMounted(() => {
 .related-image {
   margin-right: 10px;
   margin-bottom: 10px; /* Ajusta el margen entre las imágenes */
+}
+
+.custom-file-label::after {
+  content: "Explorar"; /* Texto que se mostrará en el botón "Examinar" */
+}
+
+/* Estilo adicional para resaltar el botón "Examinar" al pasar el cursor */
+.custom-file-label:hover {
+  cursor: pointer;
+  background-color: #e9ecef;
 }
 
 </style>
