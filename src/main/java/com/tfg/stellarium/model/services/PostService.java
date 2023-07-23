@@ -11,5 +11,7 @@ public interface PostService {
 
     List<Post> searchAllPosts();
 
+    List<Post> searchPostsByType(String tipo);
+
     boolean deletePost(Long id);
 }

@@ -46,6 +46,14 @@ public class PostController {
         return new ResponseEntity<>(postDtos, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<PostDto>> searchAllPosts(@RequestParam String type) {
+        List<PostDto> postDtos = postService.searchPostsByType(type.toUpperCase()).stream()
+                .map(PostConversor::toDto)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(postDtos, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         boolean isDeleted = postService.deletePost(id);

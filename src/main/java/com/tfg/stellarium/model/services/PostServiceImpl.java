@@ -46,6 +46,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> searchPostsByType(String tipo) {
+        return postDao.findAllByTipo(tipo).stream()
+                .filter(post -> post.getTipo().equals(tipo.toUpperCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public boolean deletePost(Long id) {
         postDao.deleteById(id);
         return postDao.findById(id).isEmpty();

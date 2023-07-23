@@ -30,7 +30,7 @@ CREATE TABLE post (
     id SERIAL PRIMARY KEY,
     description TEXT,
     name VARCHAR(255),
-    post_type VARCHAR(20)
+    post_type VARCHAR(40)
 );
 
 CREATE TABLE related_image (
