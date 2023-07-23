@@ -32,7 +32,7 @@
             <div v-if="publication.relatedImages.length > 0">
               <h4>Imágenes asociadas:</h4>
               <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex">
-                <img :src="image" alt="Imaxe asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;margin-bottom: 10px;" />
+                <img :src="arrayToImage(image)" alt="Imaxe asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;margin-bottom: 10px;" />
               </div>
             </div>
           </li>
