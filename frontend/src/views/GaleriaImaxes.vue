@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h1 class="title">Galería de Imaxes</h1>
+    <div class="uploadButton" v-if="loggedIn">
+      <button @click="uploadImage" class="btn btn-outline-light btn-lg mt-5" style="margin-bottom: 20px;">Subir Imaxe</button>
+    </div>
     <div v-if="showModal" class="modal" @click="closeModal">
       <div class="modal-content-container">
         <img :src="arrayToImage(selectedImage.datos)" class="modal-content" />
@@ -18,9 +21,6 @@
           <p class="error-message">{{ errorMessage }}</p>
         </div>
       </div>
-    </div>
-    <div class="uploadButton" v-if="loggedIn">
-      <button @click="uploadImage" class="btn btn-outline-light btn-lg mt-5">Subir Imaxe</button>
     </div>
   </div>
 </template>
