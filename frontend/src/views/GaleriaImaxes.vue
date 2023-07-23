@@ -2,12 +2,16 @@
   <div class="container">
     <h1 class="title">Galería de Imaxes</h1>
     <div v-if="showModal" class="modal" @click="closeModal">
-      <img :src="selectedImage" class="modal-content" />
+      <div class="modal-content-container">
+        <img :src="arrayToImage(selectedImage.datos)" class="modal-content" />
+        <div class="button-container">
+          <button v-if="loggedIn" @click="eliminarImagen(selectedImage.id)" class="btn btn-danger btn-sm mt-2 red-button">Eliminar</button>
+        </div>
+      </div>
     </div>
     <div class="image-container">
       <div v-for="(imagen, index) in reversedImages" :key="imagen.id" class="image-item">
-        <img :src="arrayToImage(imagen.datos)" @click="openModal(arrayToImage(imagen.datos))" alt="imagen" />
-        <button v-if="loggedIn" style="padding: 1px" @click="eliminarImagen(imagen.id)" class="btn btn-danger btn-sm mt-2">Eliminar</button>
+        <img :src="arrayToImage(imagen.datos)" @click="openModal(imagen)" alt="imagen" />
       </div>
       <div v-if="errorModal" class="modal error-modal" @click="closeErrorModal">
         <div class="modal-content">
@@ -37,6 +41,7 @@ export default {
   },
   computed: {
     reversedImages() {
+      console.log([...this.imagenes].reverse())
       return [...this.imagenes].reverse();
     },
   },
@@ -99,11 +104,16 @@ export default {
         console.error(error);
       }
     },
-    async eliminarImagen(id) {
+    async eliminarImagen(selectedImageId) {
+      if (!confirm('¿Estás seguro de que deseas eliminar esta imagen?')) {
+        return;
+      }
+      console.log(selectedImageId);
       try {
-        await axios.delete(`http://localhost:8080/stellarium/imagenes/${id}`);
+        await axios.delete(`http://localhost:8080/stellarium/imagenes/${selectedImageId}`);
         // Actualizar la lista de imágenes después de eliminar
         this.fetchImages();
+        this.showModal = false;
       } catch (error) {
         console.error(error);
       }
@@ -128,17 +138,29 @@ export default {
 .uploadButton {
 }
 
-.modal {
+.modal-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
@@ -187,5 +209,16 @@ export default {
   height: 100%;
   object-fit: cover;
   cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.red-button {
+  background-color: #ff0000; /* Color de fondo rojo (#ff0000) */
+  color: #ffffff; /* Color del texto blanco (#ffffff) */
 }
 </style>
