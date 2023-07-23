@@ -41,7 +41,7 @@
           <button @click="cancelEdit" class="btn btn-secondary">Cancel</button>
         </form>
   </div>
-    <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': showModal }">
+    <div class="modal" tabindex="-1" role="dialog" v-if="showModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
