@@ -4,17 +4,18 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-
 import {ref, computed} from "vue";
 
 const collapsed = ref(false);
+localStorage.setItem('menuCollapsed', JSON.stringify(collapsed.value))
 
 const handleToggleMenu = () => {
   collapsed.value = !collapsed.value;
-  console.log("click", collapsed.value)
+  localStorage.setItem('menuCollapsed', JSON.stringify(collapsed.value))
 };
 
 const contentWidth = computed(() => {
+  console.log(collapsed ? 'calc(100% - 80px)' : 'calc(100% - 350px)');
   return collapsed.value ? 'calc(100% - 80px)' : 'calc(100% - 350px)';
 });
 
@@ -36,7 +37,6 @@ const currentRoutePath = computed(() => router.currentRoute.value.path);
     </div>
   </div>
 </template>
-
 
 <style scoped>
 

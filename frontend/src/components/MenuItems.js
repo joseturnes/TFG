@@ -1,7 +1,7 @@
 export default {
     profile: {
         name : 'Iniciar sesión como administrador',
-        img: 'stellarium.png',
+        img: 'stellarium.jpeg',
         onClick(router){
             console.log('Hola ' + this.name);
             console.log(router);
@@ -15,7 +15,7 @@ export default {
     },
     logout: {
         name : 'Pechar sesión',
-        img: 'stellarium.png',
+        img: 'stellarium.jpeg',
         onClick(router){
             console.log('Chao ' + this.name);
             console.log(router);

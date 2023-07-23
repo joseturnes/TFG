@@ -34,13 +34,18 @@ import { useRouter } from 'vue-router';
 import { onBeforeUnmount } from 'vue';
 
 const emit = defineEmits(['menuCollapsed'])
+
+let collapsed = ref(JSON.parse(localStorage.getItem('menuCollapsed')) || false);
+
+console.log(collapsed.value);
+
 const menuButtonClick = () => {
+  collapsed.value = JSON.parse(localStorage.getItem('menuCollapsed')) || false;
   collapsed.value = !collapsed.value;
   console.log("Menu collapsed", collapsed.value);
   emit("menuCollapsed");
-};
 
-let collapsed = ref(false);
+};
 
 const router = useRouter();
 

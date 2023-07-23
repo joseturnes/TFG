@@ -22,7 +22,7 @@
         <p>Loading user data... <font-awesome-icon icon="spinner" spin /></p>
       </div>
     </div>
-    <div style="padding-top: 10px" v-if="editMode">
+    <div style="padding-top: 10px;color: white;" v-if="editMode">
         <h3>Edit Profile</h3>
         <form @submit.prevent="updateProfile">
           <div class="mb-3">
@@ -37,7 +37,7 @@
             <label for="email" class="form-label">Email:</label>
             <input v-model="editUser.email" id="email" class="form-control" required />
           </div>
-          <button type="submit" class="btn btn-dark">Save Changes</button>
+          <button style="margin-right: 10px" type="submit" class="btn btn-dark">Save Changes</button>
           <button @click="cancelEdit" class="btn btn-secondary">Cancel</button>
         </form>
   </div>
