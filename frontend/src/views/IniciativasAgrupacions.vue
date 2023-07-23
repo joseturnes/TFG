@@ -24,7 +24,10 @@
       <div style="margin-top: 20px">
         <ul class="list-group">
           <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
-            <h3 class="mb-3">{{ publication.name }}</h3>
+            <div class="publication-header">
+              <h3 class="mb-3">{{ publication.name }}</h3>
+              <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.id)" class="btn btn-danger btn-sm mt-2 red-button">Eliminar</button>
+            </div>
             <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
             <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
             <p v-if="publication.showFullContent">{{ publication.description }}</p>
@@ -169,6 +172,19 @@ const openModal = (image) => {
 const closeModal = () => {
   selectedImage.value = '';
   showModal.value = false;
+};
+
+const eliminarPublicacion = async (id) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/stellarium/posts/${id}`);
+    if (response.status === 200) {
+      fetchPosts();
+    } else {
+      console.error('Error al eliminar la publicación:', response);
+    }
+  } catch (error) {
+    console.error('Error al eliminar la publicación:', error);
+  }
 };
 
 // Inicializar la bandera showFullContent en falso para todas las publicaciones

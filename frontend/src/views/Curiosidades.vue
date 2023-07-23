@@ -24,15 +24,20 @@
       <div style="margin-top: 20px">
         <ul class="list-group">
           <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
-            <h3 class="mb-3">{{ publication.name }}</h3>
+            <div class="publication-header">
+              <h3 class="mb-3">{{ publication.name }}</h3>
+              <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.id)" class="btn btn-danger btn-sm mt-2 red-button">Eliminar</button>
+            </div>
             <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
             <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
             <p v-if="publication.showFullContent">{{ publication.description }}</p>
             <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
             <div v-if="publication.relatedImages.length > 0">
-              <h4>Imágenes asociadas:</h4>
-              <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex">
-                <img :src="arrayToImage(image)" alt="Imaxe asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;margin-bottom: 10px;" />
+              <h4>Imaxes asociadas: </h4>
+              <div :class="`image-container ${publication.relatedImages.length <= 3 ? 'image-container-flex' : ''}`">
+                <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex" class="related-image">
+                  <img :src="arrayToImage(image)" alt="Imagen asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;" />
+                </div>
               </div>
             </div>
           </li>
@@ -169,6 +174,19 @@ const closeModal = () => {
   showModal.value = false;
 };
 
+const eliminarPublicacion = async (id) => {
+  try {
+    const response = await axios.delete(`http://localhost:8080/stellarium/posts/${id}`);
+    if (response.status === 200) {
+      fetchPosts();
+    } else {
+      console.error('Error al eliminar la publicación:', response);
+    }
+  } catch (error) {
+    console.error('Error al eliminar la publicación:', error);
+  }
+};
+
 // Inicializar la bandera showFullContent en falso para todas las publicaciones
 onMounted(() => {
   publicaciones.value.forEach((publication) => {
@@ -265,7 +283,8 @@ onMounted(() => {
 }
 
 .image-container {
-  white-space: nowrap; /* Para que las imágenes estén en la misma línea */
+  display: flex; /* Usamos flexbox para ajustar las imágenes */
+  flex-wrap: wrap; /* Para que las imágenes estén en la misma línea */
 }
 
 .image-container-flex {
@@ -276,6 +295,16 @@ onMounted(() => {
 .related-image {
   margin-right: 10px;
   margin-bottom: 10px; /* Ajusta el margen entre las imágenes */
+}
+
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.red-button {
+  margin-top: 0;
 }
 
 </style>
