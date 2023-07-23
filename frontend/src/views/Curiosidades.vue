@@ -1,9 +1,9 @@
 <template>
-  <div style="color: white;" class="container mt-5">
-    <h2 class="mb-4">Curiosidades</h2>
+  <div style="color: black;" class="container mt-5">
+    <h2 style="color:white;" class="mb-4">Curiosidades</h2>
     <div v-if="isLoggedIn">
       <!-- Formulario para crear una nueva publicación -->
-      <form @submit.prevent="crearPublicacion">
+      <form style="color: white" @submit.prevent="crearPublicacion">
         <div class="mb-3">
           <label for="titulo" class="form-label">Título : </label>
           <input v-model="titulo" id="titulo" class="form-control" required />
@@ -21,21 +21,52 @@
       <div v-if="postCreated" style="padding-top: 10px" class="success-message">
         Post creado correctamente!
       </div>
+      <div style="margin-top: 20px">
+        <ul class="list-group">
+          <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
+            <h3 class="mb-3">{{ publication.name }}</h3>
+            <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
+            <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
+            <p v-if="publication.showFullContent">{{ publication.description }}</p>
+            <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
+            <div v-if="publication.relatedImages.length > 0">
+              <h4>Imágenes asociadas:</h4>
+              <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex">
+                <img :src="image" alt="Imaxe asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;margin-bottom: 10px;" />
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
     <div v-else>
       <!-- Lista de publicaciones -->
       <ul class="list-group">
-        <li v-for="publicacion in publicaciones" :key="publicacion.id" class="list-group-item">
-          <h3 class="mb-3">{{ publicacion.titulo }}</h3>
-          <p>{{ publicacion.contenido }}</p>
+        <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
+          <h3 class="mb-3">{{ publication.name }}</h3>
+          <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
+          <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
+          <p v-if="publication.showFullContent">{{ publication.description }}</p>
+          <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
+          <div v-if="publication.relatedImages.length > 0">
+            <h4>Imágenes asociadas:</h4>
+            <div :class="`image-container ${publication.relatedImages.length <= 3 ? 'image-container-flex' : ''}`">
+              <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex" class="related-image">
+                <img :src="arrayToImage(image)" alt="Imagen asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;" />
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
+    </div>
+    <div v-if="showModal" class="modal" @click="closeModal">
+      <img :src="selectedImage" class="modal-content" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import axios from 'axios';
 
 const isLoggedIn = ref(localStorage.getItem('userToken') != null);
@@ -44,6 +75,8 @@ const postCreated = ref(false);
 
 const titulo = ref('');
 const contenido = ref('');
+const publicaciones = ref([]);
+const publicacionesInvertidas = ref([]);
 
 const post = ref({
   name: '',
@@ -51,6 +84,19 @@ const post = ref({
   type: 'CURIOSIDADES',
   relatedImages: [],
 });
+
+const fetchPosts = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/stellarium/posts/search?type=CURIOSIDADES');
+    publicaciones.value = response.data;
+    console.log(publicaciones.value);
+    publicacionesInvertidas.value = publicaciones.value.reverse();
+    console.log(publicacionesInvertidas);
+
+  } catch (error) {
+    console.error('Error al obtener los posts:', error);
+  }
+};
 
 const onFileChange = (event) => {
   const files = event.target.files;
@@ -79,6 +125,7 @@ const crearPublicacion = async () => {
     postCreated.value = true;
     setTimeout(() => {
       postCreated.value = false;
+      fetchPosts();
     }, 3000);
     titulo.value = '';
     contenido.value = '';
@@ -87,6 +134,51 @@ const crearPublicacion = async () => {
     console.error('Error al crear el post:', error);
   }
 };
+
+const getTrimmedContent = (publication) => {
+  if (publication.description.length <= 300) {
+    return publication.description;
+  } else {
+    return publication.showFullContent ? publication.description : publication.description.slice(0, 300) + "...";
+  }
+};
+
+// Función para mostrar el contenido completo cuando el usuario hace clic en el enlace
+const showFullContent = (publication) => {
+  publication.showFullContent = true;
+};
+
+const showSmallContent = (publication) => {
+  publication.showFullContent = false;
+};
+
+const arrayToImage = (bytes) => {
+  return `data:image/jpeg;base64,${bytes}`;
+};
+
+const showModal = ref(false);
+const selectedImage = ref('');
+
+const openModal = (image) => {
+  selectedImage.value = image;
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  selectedImage.value = '';
+  showModal.value = false;
+};
+
+// Inicializar la bandera showFullContent en falso para todas las publicaciones
+onMounted(() => {
+  publicaciones.value.forEach((publication) => {
+    publication.showFullContent = false;
+  });
+});
+
+onMounted(() => {
+  fetchPosts();
+});
 </script>
 
 <style>
@@ -131,5 +223,60 @@ const crearPublicacion = async () => {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
 }
+
+.publication-item {
+  margin-bottom: 20px;
+}
+
+.show-more-btn,
+.show-less-btn {
+  cursor: pointer;
+}
+
+.show-more-btn:hover,
+.show-less-btn:hover {
+  /* Estilos para el feedback visual al pasar el cursor sobre los botones */
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 3px;
+}
+.link-black {
+  color: black;
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.image-container {
+  white-space: nowrap; /* Para que las imágenes estén en la misma línea */
+}
+
+.image-container-flex {
+  display: flex; /* Usamos flexbox para ajustar las imágenes */
+  flex-wrap: wrap; /* Envuelve las imágenes a la siguiente línea si no hay suficiente espacio */
+}
+
+.related-image {
+  margin-right: 10px;
+  margin-bottom: 10px; /* Ajusta el margen entre las imágenes */
+}
+
 </style>
 
