@@ -32,11 +32,10 @@
               <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.id)" class="btn btn-outline-danger btn-sm mt-2 red-button">Eliminar</button>
             </div>
             <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
-            <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
+            <a v-if="!publication.showFullContent && publication.description.length > 300" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
             <p v-if="publication.showFullContent">{{ publication.description }}</p>
             <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
             <div v-if="publication.relatedImages.length > 0">
-              <h4>Imaxes asociadas: </h4>
               <div :class="`image-container ${publication.relatedImages.length <= 3 ? 'image-container-flex' : ''}`">
                 <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex" class="related-image">
                   <img :src="arrayToImage(image)" alt="Imagen asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;" />
@@ -53,11 +52,10 @@
         <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
           <h3 class="mb-3">{{ publication.name }}</h3>
           <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
-          <a v-if="!publication.showFullContent" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
+          <a v-if="!publication.showFullContent && publication.description.length > 300" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
           <p v-if="publication.showFullContent">{{ publication.description }}</p>
           <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
           <div v-if="publication.relatedImages.length > 0">
-            <h4>Imágenes asociadas:</h4>
             <div :class="`image-container ${publication.relatedImages.length <= 3 ? 'image-container-flex' : ''}`">
               <div v-for="(image, imgIndex) in publication.relatedImages" :key="imgIndex" class="related-image">
                 <img :src="arrayToImage(image)" alt="Imagen asociada" @click="openModal(arrayToImage(image))" style="max-width: 200px; margin-right: 10px;" />
@@ -318,6 +316,11 @@ onMounted(() => {
 .custom-file-label:hover {
   cursor: pointer;
   background-color: #e9ecef;
+}
+
+.list-group .list-group-item{
+  background-color: #9c9c9c;
+  border-radius: 10px;
 }
 </style>
 
