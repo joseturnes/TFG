@@ -42,15 +42,16 @@
         </form>
   </div>
     <div class="modal" tabindex="-1" role="dialog" v-if="showModal">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Create New User</h5>
-            <button type="button" class="btn-close" @click="closeSignUpModal" aria-label="Close"></button>
+            <h5 class="modal-title">Crear novo usuario</h5>
+            <button type="button" class="btn btn-light" @click="closeSignUpModal" aria-label="Close">
+              <font-awesome-icon icon="fa-solid fa-xmark" />
+            </button>
           </div>
           <div class="modal-body">
             <div>
-              <h3>Crear novo usuario</h3>
               <form @submit.prevent="createUser">
                 <div class="mb-3">
                   <label for="username" class="form-label">Nome de usuario : </label>
@@ -251,5 +252,23 @@ const createUser = async () => {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.modal-dialog {
+  width: 100%;
+  height: 100%;
 }
 </style>

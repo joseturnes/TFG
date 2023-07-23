@@ -21,7 +21,8 @@ import {
     faMoon,
     faImages,
     faArrowRightFromBracket,
-    faSpinner
+    faSpinner,
+    faXmark
 } from '@fortawesome/free-solid-svg-icons'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,6 +43,7 @@ library.add(faImages);
 library.add(faUser);
 library.add(faArrowRightFromBracket);
 library.add(faSpinner);
+library.add(faXmark);
 
 createApp(App)
     .use(router)
