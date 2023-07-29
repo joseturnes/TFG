@@ -15,14 +15,14 @@
       <!-- Formulario para crear una nueva publicación -->
       <form style="color: white" @submit.prevent="crearPublicacion">
         <div class="mb-3">
-          <label for="titulo" class="form-label">Título : </label>
+          <label for="titulo" class="form-label">Nome : </label>
           <input v-model="titulo" id="titulo" class="form-control" required />
         </div>
         <div class="mb-3">
           <label for="contenido" class="form-label">Contido : </label>
           <textarea v-model="contenido" id="contenido" class="form-control" required></textarea>
         </div>
-        <button type="submit" class="btn btn-outline-light">Crear Publicación</button>
+        <button type="submit" class="btn btn-outline-light">Engadir información</button>
       </form>
       <div v-if="postCreated" style="padding-top: 10px" class="success-message">
         Información engadida correctamente!
@@ -176,16 +176,8 @@ onMounted(() => {
   margin-left: auto;
   border-radius: 10px;
   margin-top: 0;
+  color: black;
 }
-.search-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888; /* Puedes ajustar el color del icono aquí */
-  pointer-events: none; /* Evita que el icono sea interactivo */
-}
-
 
 /* Vertically align the search input with the "h2" heading */
 .align-right {

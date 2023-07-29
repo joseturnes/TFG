@@ -245,7 +245,7 @@ const createUser = async () => {
   justify-content: center;
   align-items: center;
   height: 100px;
-  background-color: #c0c0c0;;
+  background-color: #c0c0c0;
   color: black;
   font-size: 20px;
   font-weight: bold;
