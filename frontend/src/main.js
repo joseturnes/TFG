@@ -23,7 +23,8 @@ import {
     faArrowRightFromBracket,
     faSpinner,
     faXmark,
-    faTrashCan
+    faTrashCan,
+    faMagnifyingGlass
 } from '@fortawesome/free-solid-svg-icons'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,6 +47,7 @@ library.add(faArrowRightFromBracket);
 library.add(faSpinner);
 library.add(faXmark);
 library.add(faTrashCan);
+library.add(faMagnifyingGlass);
 
 createApp(App)
     .use(router)

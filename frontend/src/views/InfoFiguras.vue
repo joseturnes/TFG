@@ -8,6 +8,7 @@
           placeholder="Buscar por nome..."
           :class="{ 'is-invalid': searchTerm.length > 30 }"
       />
+      <font-awesome-icon style="color: white; margin-left: 5px" icon="fa-solid fa-magnifying-glass" />
       <div class="invalid-feedback">O término de búsqueda non pode exceder os 30 carácteres.</div>
     </div>
     <div v-if="isLoggedIn">
@@ -174,7 +175,17 @@ onMounted(() => {
   padding: 5px 10px;
   margin-left: auto;
   border-radius: 10px;
+  margin-top: 0;
 }
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888; /* Puedes ajustar el color del icono aquí */
+  pointer-events: none; /* Evita que el icono sea interactivo */
+}
+
 
 /* Vertically align the search input with the "h2" heading */
 .align-right {
