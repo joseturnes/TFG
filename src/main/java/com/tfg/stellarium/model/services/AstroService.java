@@ -14,4 +14,6 @@ public interface AstroService {
     Astro getAstroByName(String name);
 
    List<Astro> getAllAstros();
+
+   boolean deleteByName(String name);
 }

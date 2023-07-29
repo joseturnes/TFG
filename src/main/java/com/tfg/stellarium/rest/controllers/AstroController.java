@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.tfg.stellarium.rest.dtos.AstroConversor.*;
 
@@ -46,5 +47,10 @@ public class AstroController {
     public List<AstroDto> getAllAstros() {
         List<Astro> astros = astroService.getAllAstros();
         return toAstroDtos(astros);
+    }
+
+    @DeleteMapping("/{name}")
+    public boolean deleteAstroByName(@PathVariable String name) {
+        return astroService.deleteByName(name);
     }
 }

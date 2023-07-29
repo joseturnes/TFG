@@ -47,7 +47,7 @@ export default {
         },
         {
             id : 1,
-            title: 'Información de Figuras',
+            title: 'Información de Corpos Celestes',
             icon: 'fa-circle-info',
             onClick(router) {
                 router.push('/info-figuras');

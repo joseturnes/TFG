@@ -16,7 +16,7 @@ CREATE TABLE usuario (
 
 CREATE TABLE astro (
     id SERIAL PRIMARY KEY,
-    description VARCHAR(2000) NOT NULL,
+    description TEXT NOT NULL,
     name VARCHAR(255)
 );
 

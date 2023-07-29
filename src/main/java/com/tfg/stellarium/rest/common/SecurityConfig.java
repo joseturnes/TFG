@@ -43,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST,"/users/loginFromServiceToken").permitAll()
 				.antMatchers(HttpMethod.POST, "/users/*/changePassword").permitAll()
 				.antMatchers(HttpMethod.POST, "/imagenes/guardar").permitAll()
-				.antMatchers(HttpMethod.POST, "/astros/guardar").permitAll()
 				.antMatchers(HttpMethod.POST, "/posts").permitAll()
 				.antMatchers(HttpMethod.GET, "/posts/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/posts/guardar").permitAll()

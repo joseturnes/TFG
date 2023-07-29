@@ -43,4 +43,11 @@ public class AstroServiceImpl implements AstroService {
     public List<Astro> getAllAstros() {
         return astroDao.findAll();
     }
+
+    @Override
+    public boolean deleteByName(String name) {
+        Astro astro = astroDao.findAstroByName(name);
+        astroDao.delete(astro);
+        return astroDao.findById(astro.getId()).isEmpty();
+    }
 }
