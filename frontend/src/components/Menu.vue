@@ -9,10 +9,10 @@
     <div class="profile">
       <img :src="'../assets/' + menuItems.profile.img" alt="profile image">
       <div class="profile-name" v-if="!collapsed">
-        <a href="#" @click.prevent="menuItems.profile.onClick(router)">
+        <a class="profile-link" href="#" @click.prevent="menuItems.profile.onClick(router)">
           {{menuItems.profile.name}} <font-awesome-icon icon="fa-solid fa-user" />
         </a>
-        <a v-if="hasUserToken" href="#" @click.prevent="menuItems.logout.onClick(router)">
+        <a class="logout-link" v-if="hasUserToken" href="#" @click.prevent="menuItems.logout.onClick(router)">
           {{menuItems.logout.name}} <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" />
         </a>
       </div>
@@ -79,7 +79,7 @@ watch(
 
 
 <style scoped>
-  .menu {
+.menu {
   color: white;
   height: 100vh;
   transition: width 0.3s;
@@ -87,6 +87,8 @@ watch(
   position: fixed;
   left: 0;
   top: 0;
+  border-right: 1px solid #dfdfdf;
+  background-color: #202021;
 }
 
 .profile-name a {
@@ -154,6 +156,16 @@ a{
 }
 a:hover{
   color: black;
+}
+
+.profile-link:hover{
+  color: white;
+  text-underline: white;
+}
+
+.logout-link:hover{
+  color: white;
+  text-underline: white;
 }
 </style>
 
