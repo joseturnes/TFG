@@ -87,7 +87,6 @@ watch(
   position: fixed;
   left: 0;
   top: 0;
-
   background-color: #202021;
 }
 

@@ -29,6 +29,7 @@
           <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
             <div class="publication-header">
               <h3 class="mb-3">{{ publication.name }}</h3>
+              <hr class="hr" />
               <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.id)" class="btn btn-outline-danger btn-sm mt-2 red-button">Eliminar</button>
             </div>
             <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
@@ -51,6 +52,7 @@
       <ul class="list-group">
         <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
           <h3 class="mb-3">{{ publication.name }}</h3>
+          <hr class="hr" />
           <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
           <a v-if="!publication.showFullContent && publication.description.length > 300" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
           <p v-if="publication.showFullContent">{{ publication.description }}</p>

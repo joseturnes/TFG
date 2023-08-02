@@ -43,6 +43,7 @@ const currentRoutePath = computed(() => router.currentRoute.value.path);
   display: flex;
   align-items: stretch;
   height: 100vh;
+  font-family: "Ubuntu";
 }
 
 .menu-container {
