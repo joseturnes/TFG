@@ -35,9 +35,9 @@
               <hr class="hr" />
               <button v-if="isLoggedIn" @click="eliminarPublicacion(publication.name)" class="btn btn-outline-danger btn-sm mt-2 red-button">Eliminar</button>
             </div>
-            <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
+            <pre v-if="!publication.showFullContent" class="custom-scrollbar" v-html="getTrimmedContent(publication)"></pre>
             <a v-if="!publication.showFullContent && publication.description.length > 300" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
-            <p v-if="publication.showFullContent">{{ publication.description }}</p>
+            <pre v-if="publication.showFullContent" class="custom-scrollbar" v-html="publication.description"></pre>
             <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
           </li>
         </ul>
@@ -49,9 +49,9 @@
         <li v-for="(publication, index) in publicacionesInvertidas" :key="publication.id" class="list-group-item publication-item">
           <h3 class="mb-3">{{ publication.name }}</h3>
           <hr class="hr" />
-          <p v-if="!publication.showFullContent" >{{ getTrimmedContent(publication) }}</p>
+          <pre v-if="!publication.showFullContent" class="custom-scrollbar" v-html="getTrimmedContent(publication)"></pre>
           <a v-if="!publication.showFullContent && publication.description.length > 300" @click="showFullContent(publication)" class="show-more-btn link-black">Amosar mais</a>
-          <p v-if="publication.showFullContent">{{ publication.description }}</p>
+          <pre v-if="publication.showFullContent" class="custom-scrollbar" v-html="publication.description"></pre>
           <a v-if="publication.showFullContent" @click="showSmallContent(publication)" class="show-less-btn link-black">Amosar menos</a>
         </li>
       </ul>
@@ -185,5 +185,32 @@ onMounted(() => {
 .align-right {
   display: flex;
   align-items: center;
+}
+
+.custom-scrollbar {
+  overflow-x: auto; /* Mostrar barras de desplazamiento horizontal solo cuando sea necesario */
+  white-space: pre-wrap; /* Mantener el formato de espacio en blanco */
+  max-height: 300px; /* Opcional: ajusta la altura máxima según tus necesidades */
+  padding: 10px; /* Opcional: agrega un poco de espacio interno */
+  background-color: #fff; /* Opcional: cambia el color de fondo */
+  border: 0px solid #ccc; /* Opcional: agrega un borde */
+}
+
+/* Estilos para las barras de desplazamiento */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>
