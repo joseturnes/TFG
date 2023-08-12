@@ -46,7 +46,7 @@ export default {
         localStorage.setItem('userName', userName);
         menuItems.setProfileName(userName);
         this.$emit('profileNameChanged', userName);
-        await this.$router.push('/');
+        await window.history.back();
       } catch (error) {
         this.errorMessage = 'Credenciales incorrectas. Inténtalo de nuevo.';
         console.error(error);

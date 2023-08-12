@@ -19,6 +19,10 @@
           <input v-model="titulo" id="titulo" class="form-control" required />
         </div>
         <div class="mb-3">
+          <label for="titulo" class="form-label">Nome no mapa (latin) : </label>
+          <input v-model="nomeMapa" id="titulo" class="form-control" required />
+        </div>
+        <div class="mb-3">
           <label for="contenido" class="form-label">Contido : </label>
           <textarea v-model="contenido" id="contenido" class="form-control" required></textarea>
         </div>
@@ -68,6 +72,7 @@ const isLoggedIn = ref(localStorage.getItem('userToken') != null);
 const postCreated = ref(false);
 
 const titulo = ref('');
+const nomeMapa = ref('');
 const contenido = ref('');
 const publicaciones = ref([]);
 const publicacionesInvertidas = ref([]);
@@ -75,7 +80,8 @@ const allFigures = ref([]);
 
 const post = ref({
   name: '',
-  description: ''
+  description: '',
+  mapName: ''
 });
 
 const fetchPosts = async () => {
@@ -95,6 +101,7 @@ const crearPublicacion = async () => {
   try {
     post.value.name = titulo.value;
     post.value.description = contenido.value;
+    post.value.mapName = nomeMapa.value;
 
     const response = await axios.post('http://localhost:8080/stellarium/astros/guardar', post.value);
     postCreated.value = true;

@@ -1,6 +1,6 @@
 <template>
   <div class="stellarium">
-    <iframe src="http://192.168.0.128:8081/" width="100%" height="100%"></iframe>
+    <iframe src="https://stellariumtfgweb.onrender.com/" width="100%" height="100%"></iframe>
   </div>
 
 </template>

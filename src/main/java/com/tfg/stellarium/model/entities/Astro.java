@@ -18,6 +18,16 @@ public class Astro {
 
     private String name;
 
+    public String getMapName() {
+        return mapName;
+    }
+
+    public void setMapName(String mapName) {
+        this.mapName = mapName;
+    }
+
+    private String mapName;
+
     public String getDescription() {
         return description;
     }

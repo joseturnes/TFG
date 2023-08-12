@@ -20,8 +20,9 @@ public class AstroServiceImpl implements AstroService {
 
     @Override
     public void createAstro(Astro astro) throws DuplicateInstanceException {
+        astro.setName(astro.getName().toLowerCase());
 
-        if (astroDao.existsByName(astro.getName())) {
+        if (astroDao.existsByName(astro.getName().toLowerCase())) {
             throw new DuplicateInstanceException("project.entities.astro", astro.getId());
         }
 
@@ -36,7 +37,7 @@ public class AstroServiceImpl implements AstroService {
 
     @Override
     public Astro getAstroByName(String name) {
-        return astroDao.findAstroByName(name);
+        return astroDao.findAstroByMapName(name.toLowerCase());
     }
 
     @Override

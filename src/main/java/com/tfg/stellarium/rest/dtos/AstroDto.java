@@ -9,5 +9,7 @@ public class AstroDto {
 
     private String description;
 
+    private String mapName;
+
     private String name;
 }

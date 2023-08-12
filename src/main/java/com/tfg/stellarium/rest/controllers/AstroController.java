@@ -37,8 +37,8 @@ public class AstroController {
     }
 
 
-    @GetMapping("/{name}")
-    public AstroDto searchAstroByName(@PathVariable("name") String name) {
+    @GetMapping("/search/{name}")
+    public AstroDto searchAstroByName(@PathVariable String name) {
         Astro astro = astroService.getAstroByName(name);
         return toAstroDto(astro);
     }

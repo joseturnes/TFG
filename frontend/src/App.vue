@@ -54,7 +54,7 @@ const currentRoutePath = computed(() => router.currentRoute.value.path);
 
 .content-container {
   flex-grow: 1;
-  height: 100vh;
+  height: 98vh;
   min-height: 0;
   margin: 1em;
 
