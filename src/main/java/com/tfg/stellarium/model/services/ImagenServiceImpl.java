@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ImagenServiceImpl {
+public class ImagenServiceImpl{
 
     @Autowired
     private ImagenDao imagenDao;

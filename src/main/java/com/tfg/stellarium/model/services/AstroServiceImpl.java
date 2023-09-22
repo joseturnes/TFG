@@ -21,6 +21,7 @@ public class AstroServiceImpl implements AstroService {
     @Override
     public void createAstro(Astro astro) throws DuplicateInstanceException {
         astro.setName(astro.getName().toLowerCase());
+        astro.setMapName(astro.getMapName().toLowerCase());
 
         if (astroDao.existsByName(astro.getName().toLowerCase())) {
             throw new DuplicateInstanceException("project.entities.astro", astro.getId());

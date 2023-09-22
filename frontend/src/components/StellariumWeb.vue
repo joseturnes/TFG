@@ -7,7 +7,6 @@
 
 <script>
 export default {
-  // Configuración del componente
   name: 'StellariumWeb'
 }
 
